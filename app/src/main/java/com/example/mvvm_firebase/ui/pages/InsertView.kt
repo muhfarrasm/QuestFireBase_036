@@ -237,7 +237,7 @@ fun FormMahasiswa(
             placeholder = { Text("Masukkan Alamat") },
         )
         Text(
-            text = errorState.nim ?: "",
+            text = errorState.alamat ?: "",
             color = Color.Red
         )
 
@@ -276,7 +276,7 @@ fun FormMahasiswa(
             KeyboardType.Number)
         )
         Text(
-            text = errorState.nama ?: "",
+            text = errorState.angkatan ?: "",
             color = Color.Red
         )
     }
