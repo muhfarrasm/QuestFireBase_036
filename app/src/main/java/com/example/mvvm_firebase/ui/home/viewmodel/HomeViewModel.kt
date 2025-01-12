@@ -3,6 +3,7 @@ package com.example.mvvm_firebase.ui.home.viewmodel
 import android.net.http.HttpException
 import android.os.Build
 import android.provider.ContactsContract.RawContacts.Data
+import android.util.Log
 import androidx.annotation.RequiresExtension
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,7 +54,9 @@ class  HomeViewModel(
             try {
                 repositoryMhs.deleteMhs(mahasiswa)
                 getMhs()
+
             } catch (e: Exception) {
+                Log.e("DeleteMhs", "Gagal menghapus mahasiswa: ${e.message}")
                 mhsUiState = HomeUiState.Error(e)
             }
         }
