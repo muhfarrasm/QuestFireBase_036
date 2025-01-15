@@ -9,7 +9,7 @@ interface RepositoryMhs {
     //mendapatkan semua data dlm bentuk aliran
     fun getAllMhs() : Flow<List<Mahasiswa>>
     //method ini untuk memanggil fungsi geetAllMahasiswa dari mahasiswaDao berdasarkan NIM
-    fun getMhs(nim: String): Flow<Mahasiswa?>
+    fun getMhsbynim(nim: String): Flow<Mahasiswa?>
 
     //Method ini memanfaatkan fungsi insertMahasiswa dari MahasiswaDao
     suspend fun insertMhs(mahasiswa: Mahasiswa)
