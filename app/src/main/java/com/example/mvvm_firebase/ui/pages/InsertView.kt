@@ -2,7 +2,10 @@ package com.example.mvvm_firebase.ui.pages
 
 import android.os.Build
 import androidx.annotation.RequiresExtension
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -48,6 +54,7 @@ fun InsertMhsView(
     onBack: () -> Unit,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier,
+
     viewModel: InsertViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ){
     val uiState = viewModel.uiState // State utama untuk loading, success, eror
@@ -168,10 +175,13 @@ fun FormMahasiswa(
     val kelas = listOf("A", "B", "C", "D", "E")
 
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(rememberScrollState())
     ){
         OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth(),
             value = mahasiswaEvent.nama,
             onValueChange = {
                 onValueChange(mahasiswaEvent.copy(nama = it)) },
@@ -263,14 +273,13 @@ fun FormMahasiswa(
             text = errorState.kelas ?: "",
             color = Color.Red
         )
-
         OutlinedTextField(
             modifier = Modifier.fillMaxWidth(),
             value = mahasiswaEvent.angkatan,
             onValueChange = {
                 onValueChange(mahasiswaEvent.copy(angkatan = it)) },
             label = { Text("Angkatan") },
-            isError = errorState.nama != null,
+            isError = errorState.angkatan != null,
             placeholder = { Text("Masukkan Angkatan") },
             keyboardOptions = KeyboardOptions(keyboardType =
             KeyboardType.Number)
@@ -279,5 +288,53 @@ fun FormMahasiswa(
             text = errorState.angkatan ?: "",
             color = Color.Red
         )
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = mahasiswaEvent.judulskripsi,
+            onValueChange = {
+                onValueChange(mahasiswaEvent.copy(judulskripsi = it)) },
+            label = { Text("Judul Skripsi") },
+            isError = errorState.judulskripsi != null,
+            placeholder = { Text("Masukkan Judul") },
+            keyboardOptions = KeyboardOptions(keyboardType =
+            KeyboardType.Number)
+        )
+        Text(
+            text = errorState.judulskripsi ?: "",
+            color = Color.Red
+        )
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = mahasiswaEvent.dosenpem1,
+            onValueChange = {
+                onValueChange(mahasiswaEvent.copy(dosenpem1 = it)) },
+            label = { Text("Dosen Pembimbing 1") },
+            isError = errorState.dosenpem1 != null,
+            placeholder = { Text("Masukkan Angkatan") },
+            keyboardOptions = KeyboardOptions(keyboardType =
+            KeyboardType.Number)
+        )
+        Text(
+            text = errorState.dosenpem1 ?: "",
+            color = Color.Red
+        )
+        OutlinedTextField(
+            modifier = Modifier
+                .fillMaxWidth(),
+            value = mahasiswaEvent.dosenpem2,
+            onValueChange = {
+                onValueChange(mahasiswaEvent.copy(dosenpem2 = it)) },
+            label = { Text("Dosen Pembimbing 2") },
+            isError = errorState.dosenpem2 != null,
+            placeholder = { Text("Dosen Pembimbing 2") },
+            keyboardOptions = KeyboardOptions(keyboardType =
+            KeyboardType.Number)
+        )
+        Text(
+            text = errorState.dosenpem2 ?: "",
+            color = Color.Red
+        )
     }
 }
+
