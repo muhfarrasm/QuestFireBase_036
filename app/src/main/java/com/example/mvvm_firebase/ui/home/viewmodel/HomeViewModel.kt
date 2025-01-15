@@ -63,8 +63,6 @@ class  HomeViewModel(
     }
 }
 sealed class HomeUiState {
-
-
     object Loading : HomeUiState()
     data class  Succes(val data: List<Mahasiswa>) : HomeUiState()
     data class  Error(val e: Throwable) : HomeUiState()
